@@ -10,14 +10,20 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Installing dependencies...'
-                sh 'pip3 install -r requirements.txt --break-system-packages'
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh 'python3 -m unittest test_app.py'
+                sh '''
+                . venv/bin/activate
+                python -m unittest test_app.py
+                '''
             }
         }
     }
