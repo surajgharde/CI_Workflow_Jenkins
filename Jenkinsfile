@@ -12,8 +12,7 @@ pipeline {
             steps {
                 sh '''
                 python3 -m venv venv
-                . venv/bin/activate
-                pip install -r requirements.txt
+                venv/bin/pip install -r requirements.txt
                 '''
             }
         }
@@ -21,8 +20,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                . venv/bin/activate
-                python -m unittest test_app.py
+                venv/bin/python -m unittest test_app.py
                 '''
             }
         }
